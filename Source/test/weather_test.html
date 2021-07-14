@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Weather Test</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body>
+<p>test</p>
+<div id="app">
+    <p>Response: {{resp}}</p>
+    <p>URL: {{url}}</p>
+    <button v-on:click="get_weather">Get Weather</button>
+</div>
+</body>
+<script type="text/javascript">
+    // const axios = require('axios');
+    var app = new Vue({
+        el: '#app',
+        data: {
+            resp: 'response',
+            appid: '70a6c233c1e5d9b4f4a25ab61ffcd5da',
+            url: ''
+        },
+        methods: {
+            get_weather: function (lon, lat){
+                lon = 7.74;
+                lat = 46.01;
+                this.url = 'http://api.openweathermap.org/data/2.5/weather?lat=' + lat + '&lon=' + lon + '&units=metric' +'&appid=' + this.appid
+                axios
+                    .get(this.url)
+                    .then(function (response) {
+                    var obj = response;
+                    app.resp = response.data;
+                    window.obj = obj;
+                    console.log(obj);
+                    });
+                }
+            }
+    })
+</script>
+</html>
+<!--<script>-->
+<!--    import App from "@/App";-->
+<!--    export default {-->
+<!--        components: {App}-->
+<!--    }-->
+<!--</script>-->
